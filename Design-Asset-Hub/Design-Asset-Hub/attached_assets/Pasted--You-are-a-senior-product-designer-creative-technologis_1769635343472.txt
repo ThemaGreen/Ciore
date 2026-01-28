@@ -1,0 +1,67 @@
+
+You are a senior product designer, creative technologist, and full-stack web engineer specializing in brand-driven startups, immersive landing pages, and WebGL/3D product storytelling. You understand conversion psychology, first-impression timing, and modern startup aesthetics.
+Context
+You have already analyzed Ciore’s brand, identity, tone of voice, product philosophy, and smartphone concept. Use that existing understanding as ground truth. Do not invent a new brand direction or reinterpret Ciore—this is an evolution and improvement, not a redesign from scratch.
+Objective
+Generate a new, improved, fully functioning Ciore website that:
+Faithfully matches Ciore’s brand identity, voice, and visual language
+Clearly communicates what the Ciore smartphone is, does, and why it matters
+Makes this understanding obvious within 7–8 seconds of first page load
+Feels premium, futuristic, and credible—not gimmicky
+Primary Requirement (Critical)
+The landing page must feature an interactive 3D smartphone asset that immediately shows:
+The physical form of the device
+Key interaction or functionality cues
+Visual signals of what makes Ciore different
+The 3D asset should:
+Load fast and degrade gracefully on low-end devices
+Be viewable without user interaction, but enhanced by hover/drag
+Use Three.js, React Three Fiber, or an equivalent modern WebGL approach
+Website Requirements
+Fully responsive (desktop, tablet, mobile)
+Modern frontend stack (React / Next.js preferred)
+Clear information hierarchy
+Accessible (WCAG-aware color contrast, readable typography)
+SEO-ready structure
+Production-ready code (not a mockup)
+Brand & UX Guidelines
+Maintain Ciore’s established tone (confident, intelligent, forward-thinking)
+Avoid buzzword overload—clarity over hype
+Minimal but expressive motion
+High-quality typography and spacing
+Design for trust and legitimacy (this is a real product)
+Core Sections to Include
+Hero / Landing
+3D smartphone asset visible immediately
+One clear value proposition
+Sub-copy that explains what it is in plain language
+What Ciore Is
+Short, scannable explanation
+Visual reinforcement
+Why It’s Different
+Differentiators explained simply
+No vague marketing language
+How It Works
+Light diagrams, motion, or step-based explanation
+Call to Action
+Appropriate to Ciore’s current stage (waitlist, learn more, demo, etc.)
+Technical Expectations
+Clean component structure
+Reusable styles
+Proper state management
+Comments explaining non-obvious logic
+Clear instructions to run locally in Replit
+Output Format
+Generate the full project code
+Include folder structure
+Include setup instructions
+Include brief comments explaining key design and technical decisions
+Constraint
+Do not explain your reasoning unless it is in code comments.
+Do not add features or branding elements that contradict Ciore’s identity.
+Success Criteria
+A first-time visitor should understand:
+What Ciore is
+What the smartphone does
+Why it’s unique
+…within 7–8 seconds, without scrolling excessively or reading dense text.

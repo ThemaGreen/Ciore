@@ -1,0 +1,592 @@
+/* =============================================
+   CIORÉ™ - Official Website Styles
+   Replication of cioreofficial.com
+   ============================================= */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+/* --- Skip Link --- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+  width: auto;
+  height: auto;
+  padding: 8px 16px;
+  background: #c9a227;
+  color: #000;
+  font-weight: 700;
+  z-index: 9999;
+  border-radius: 4px;
+}
+
+/* --- Header --- */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 24px;
+  background: transparent;
+}
+
+.header-social {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.header-social a {
+  color: #fff;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.header-social a:hover { opacity: 1; }
+
+.header-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.logo-img {
+  width: 120px;
+  height: auto;
+}
+
+.logo-text {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #c9a227;
+  text-transform: uppercase;
+}
+
+.header-nav {
+  display: flex;
+  gap: 32px;
+  margin-top: 4px;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #fff;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  border-bottom-color: #fff;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  background-color: #000;
+  background-image:
+    radial-gradient(ellipse at 70% 60%, rgba(30, 80, 20, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse at 90% 80%, rgba(50, 130, 30, 0.2) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 80px 0;
+  overflow: hidden;
+}
+
+.hero-bg {
+  width: 100%;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text-block h1 {
+  font-size: clamp(2.2rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  color: #fff;
+}
+
+/* --- Buttons --- */
+.btn-gold {
+  display: inline-block;
+  background-color: #c9a227;
+  color: #000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 10px 24px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
+  text-transform: uppercase;
+}
+.btn-gold:hover {
+  background-color: #e6b82a;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 10px 24px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-transform: uppercase;
+}
+.btn-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* --- Built Section (Split Layout) --- */
+.built-section {
+  padding: 100px 32px;
+  background-color: #000;
+}
+
+.built-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 80px;
+}
+
+.built-left {
+  flex: 1;
+}
+
+.built-left h2 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.built-right {
+  flex: 1.2;
+}
+
+/* --- Accordion Styles --- */
+.accordion-group {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.accordion-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-btn span:first-child {
+  transition: color 0.2s;
+}
+
+.accordion-btn:hover span:first-child {
+  color: #c9a227;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s;
+  padding-bottom: 0;
+}
+
+.accordion-content.open {
+  max-height: 500px; /* Large enough */
+  padding-bottom: 24px;
+}
+
+.accordion-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.accordion-content ul {
+  padding-left: 20px;
+}
+
+.accordion-content li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  opacity: 0.9;
+  list-style-type: disc;
+}
+
+/* --- CTA Section --- */
+.cta-section {
+  padding: 80px 32px;
+  background-color: #000;
+  text-align: center;
+}
+
+.cta-header {
+  margin-bottom: 48px;
+}
+
+.cta-header p {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.cta-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cta-card {
+  text-align: left;
+  padding-bottom: 24px;
+}
+
+.cta-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+.cta-card p {
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+/* --- Waitlist FAQ Section --- */
+.waitlist-section {
+  padding: 100px 32px;
+  background-color: #000;
+  background-image: url('assets/watch-bg.jpg'); /* The watch background */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.waitlist-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1;
+}
+
+.waitlist-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 80px;
+}
+
+.waitlist-left { flex: 1; }
+.waitlist-left h2 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.waitlist-right { flex: 1.2; }
+
+/* --- Team Section --- */
+.team-section {
+  padding: 100px 32px;
+  background-color: #000;
+}
+
+.team-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 80px;
+}
+
+.team-left { flex: 1; }
+.team-left h2 {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.team-heading {
+  margin-bottom: 40px;
+}
+
+.team-right { flex: 1.2; }
+
+/* --- Donation Section --- */
+.donate-section {
+  padding: 100px 32px;
+  background-color: #000;
+  text-align: center;
+}
+
+.donate-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.donate-container h2 {
+  font-size: 3rem;
+  margin-bottom: 24px;
+}
+
+.donate-container p {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+.donate-form {
+  margin-top: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.donate-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.amount-label {
+  flex: 1;
+  min-width: 120px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.amount-label:has(input:checked) {
+  background: #c9a227;
+  color: #000;
+}
+
+.amount-label input { display: none; }
+
+.donate-frequency {
+  margin-bottom: 24px;
+}
+
+.donate-frequency label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.donate-frequency select {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 4px;
+}
+
+.cover-fee-wrap {
+  margin-bottom: 32px;
+}
+
+.cover-fee-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.fee-breakdown, .total-line {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.8;
+}
+
+.total-line {
+  opacity: 1;
+  font-size: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 16px;
+}
+
+/* --- Contact Section --- */
+.contact-section {
+  padding: 100px 32px;
+  background-color: #000;
+}
+
+.contact-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 80px;
+}
+
+.contact-left { flex: 1; }
+.contact-left h2 {
+  font-size: 3rem;
+  margin-bottom: 24px;
+}
+
+.contact-right { flex: 1.2; }
+
+.contact-form {
+  margin-top: 48px;
+}
+
+.form-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.required { color: #c9a227; }
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+  width: 100%;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.form-checkbox label {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+/* --- Footer --- */
+#footer {
+  padding: 80px 32px;
+  background-color: #000;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .built-container, .waitlist-container, .team-container, .contact-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+}

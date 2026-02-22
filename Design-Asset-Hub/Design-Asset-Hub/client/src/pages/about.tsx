@@ -139,7 +139,7 @@ export default function About() {
   );
 }
 
-function Value({ title, text }) {
+function Value({ title, text }: { title: string; text: string }) {
   return (
     <div className="card">
       <h3>{title}</h3>

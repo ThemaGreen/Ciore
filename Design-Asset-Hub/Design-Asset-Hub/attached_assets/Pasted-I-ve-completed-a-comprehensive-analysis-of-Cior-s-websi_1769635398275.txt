@@ -17,7 +17,7 @@ Cioré's current website is a single-page design built on **Squarespace 7.1**, s
 
 ### **Unpublished Pages (Not Linked):**
 1. Volunteer/Collab
-2. Contact  
+2. Contact
 3. New Home
 4. Donate
 5. About
@@ -107,7 +107,7 @@ Six expandable accordion-style buttons presenting key product values:
 ### **F. Volunteer Application Section**
 - **Large Display Text:** "Contribute Your Genius"
   - "Contribute" in white
-  - "Your" in white  
+  - "Your" in white
   - "Genius" emphasized in green
 - CTA Button: "Apply Here" → Links to Google Form: `https://forms.gle/h6yDj5QLArV8Zeew6`
 
@@ -160,7 +160,7 @@ Six expandable accordion-style buttons presenting key product values:
 - Social links:
   - Instagram: `http://instagram.com/cioreofficial`
   - Facebook: `http://facebook.com/profile.php?id=61575434777358`
-  - TikTok: `https://www.tiktok.com/cioreofficial`
+  - TikTok: `https://www.tiktok.com/@cioreofficial`
 
 ***
 

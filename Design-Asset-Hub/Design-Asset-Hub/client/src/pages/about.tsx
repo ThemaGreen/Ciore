@@ -3,7 +3,6 @@ import "./about.css";
 export default function About() {
   return (
     <main className="about">
-      {/* WHAT WE STAND FOR */}
       <section className="section hero">
         <span className="label">WHAT WE STAND FOR</span>
 
@@ -26,7 +25,6 @@ export default function About() {
         </p>
       </section>
 
-      {/* OUR MISSION */}
       <section className="section">
         <span className="label">OUR MISSION</span>
 
@@ -62,7 +60,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* CORE VALUES */}
       <section className="section">
         <span className="label">OUR CORE VALUES</span>
 
@@ -90,7 +87,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* BUILT WITH YOU IN MIND */}
       <section className="section">
         <span className="label">BUILT WITH YOU IN MIND</span>
 

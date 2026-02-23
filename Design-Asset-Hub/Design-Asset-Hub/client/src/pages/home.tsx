@@ -18,7 +18,9 @@ function useLowPowerHint() {
   useEffect(() => {
     const nav = navigator as any;
     const cores =
-      typeof nav?.hardwareConcurrency === "number" ? nav.hardwareConcurrency : 8;
+      typeof nav?.hardwareConcurrency === "number"
+        ? nav.hardwareConcurrency
+        : 8;
     const mem = typeof nav?.deviceMemory === "number" ? nav.deviceMemory : 8;
     const saveData = !!nav?.connection?.saveData;
 
@@ -58,7 +60,8 @@ const FEATURES = [
     key: "materials",
     title: "Eco-conscious materials",
     icon: Leaf,
-    summary: "Material choices that respect the planet — and still feel premium.",
+    summary:
+      "Material choices that respect the planet — and still feel premium.",
     details:
       "Sustainability should look and feel legitimate. Cioré balances durability, repairability, and responsible sourcing while maintaining a refined finish.",
   },
@@ -253,7 +256,10 @@ export default function Home() {
                 data-testid="text-hero-title"
               >
                 A sustainable smartphone
-                <span className="text-white/70"> that protects your privacy </span>
+                <span className="text-white/70">
+                  {" "}
+                  that protects your privacy{" "}
+                </span>
                 and respects the planet.
               </h1>
 
@@ -370,19 +376,42 @@ export default function Home() {
                 >
                   <PhoneScene lowPower={lowPower} />
                 </div>
-                <div className="mt-4 grid grid-cols-3 gap-2" data-testid="grid-visual-cues">
-                  <div className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2" data-testid="cue-privacy">
-                    <div className="flex items-center gap-2 text-xs text-white/70" data-testid="text-cue-privacy">
-                      <Lock className="size-4 text-[hsl(var(--primary))]" /> Privacy cues
+                <div
+                  className="mt-4 grid grid-cols-3 gap-2"
+                  data-testid="grid-visual-cues"
+                >
+                  <div
+                    className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2"
+                    data-testid="cue-privacy"
+                  >
+                    <div
+                      className="flex items-center gap-2 text-xs text-white/70"
+                      data-testid="text-cue-privacy"
+                    >
+                      <Lock className="size-4 text-[hsl(var(--primary))]" />{" "}
+                      Privacy cues
                     </div>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2" data-testid="cue-solar">
-                    <div className="flex items-center gap-2 text-xs text-white/70" data-testid="text-cue-solar">
-                      <SunMedium className="size-4 text-[hsl(var(--accent))]" /> Solar assist
+                  <div
+                    className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2"
+                    data-testid="cue-solar"
+                  >
+                    <div
+                      className="flex items-center gap-2 text-xs text-white/70"
+                      data-testid="text-cue-solar"
+                    >
+                      <SunMedium className="size-4 text-[hsl(var(--accent))]" />{" "}
+                      Solar assist
                     </div>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2" data-testid="cue-modular">
-                    <div className="flex items-center gap-2 text-xs text-white/70" data-testid="text-cue-modular">
+                  <div
+                    className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2"
+                    data-testid="cue-modular"
+                  >
+                    <div
+                      className="flex items-center gap-2 text-xs text-white/70"
+                      data-testid="text-cue-modular"
+                    >
                       <Wrench className="size-4 text-white/70" /> Modular build
                     </div>
                   </div>
@@ -396,7 +425,10 @@ export default function Home() {
                 <div data-testid="text-visual-meta-left">
                   Concept render · optimized WebGL
                 </div>
-                <div className="hidden sm:block" data-testid="text-visual-meta-right">
+                <div
+                  className="hidden sm:block"
+                  data-testid="text-visual-meta-right"
+                >
                   <span className="text-white/70">Tip:</span> try hover for tilt
                 </div>
               </div>
@@ -464,17 +496,27 @@ export default function Home() {
                   className="rounded-2xl border border-white/10 bg-white/4 p-4"
                   data-testid="mini-what-privacy"
                 >
-                  <div className="flex items-center gap-2" data-testid="row-mini-privacy">
+                  <div
+                    className="flex items-center gap-2"
+                    data-testid="row-mini-privacy"
+                  >
                     <Lock className="size-4 text-[hsl(var(--primary))]" />
                     <div className="ciore-display text-xs text-white/70">
                       Privacy surface
                     </div>
                   </div>
-                  <div className="mt-2 text-sm font-medium text-white" data-testid="text-mini-privacy-title">
+                  <div
+                    className="mt-2 text-sm font-medium text-white"
+                    data-testid="text-mini-privacy-title"
+                  >
                     Clear permissions
                   </div>
-                  <p className="mt-1 text-sm text-white/65" data-testid="text-mini-privacy-body">
-                    Defaults that reduce tracking, plus controls that are easy to understand.
+                  <p
+                    className="mt-1 text-sm text-white/65"
+                    data-testid="text-mini-privacy-body"
+                  >
+                    Defaults that reduce tracking, plus controls that are easy
+                    to understand.
                   </p>
                 </div>
 
@@ -482,16 +524,25 @@ export default function Home() {
                   className="rounded-2xl border border-white/10 bg-white/4 p-4"
                   data-testid="mini-what-solar"
                 >
-                  <div className="flex items-center gap-2" data-testid="row-mini-solar">
+                  <div
+                    className="flex items-center gap-2"
+                    data-testid="row-mini-solar"
+                  >
                     <SunMedium className="size-4 text-[hsl(var(--accent))]" />
                     <div className="ciore-display text-xs text-white/70">
                       Ambient energy
                     </div>
                   </div>
-                  <div className="mt-2 text-sm font-medium text-white" data-testid="text-mini-solar-title">
+                  <div
+                    className="mt-2 text-sm font-medium text-white"
+                    data-testid="text-mini-solar-title"
+                  >
                     Solar assist
                   </div>
-                  <p className="mt-1 text-sm text-white/65" data-testid="text-mini-solar-body">
+                  <p
+                    className="mt-1 text-sm text-white/65"
+                    data-testid="text-mini-solar-body"
+                  >
                     A supplementary layer for day-to-day resilience.
                   </p>
                 </div>
@@ -500,16 +551,25 @@ export default function Home() {
                   className="rounded-2xl border border-white/10 bg-white/4 p-4"
                   data-testid="mini-what-modular"
                 >
-                  <div className="flex items-center gap-2" data-testid="row-mini-modular">
+                  <div
+                    className="flex items-center gap-2"
+                    data-testid="row-mini-modular"
+                  >
                     <Wrench className="size-4 text-white/80" />
                     <div className="ciore-display text-xs text-white/70">
                       Built to repair
                     </div>
                   </div>
-                  <div className="mt-2 text-sm font-medium text-white" data-testid="text-mini-modular-title">
+                  <div
+                    className="mt-2 text-sm font-medium text-white"
+                    data-testid="text-mini-modular-title"
+                  >
                     Modular design
                   </div>
-                  <p className="mt-1 text-sm text-white/65" data-testid="text-mini-modular-body">
+                  <p
+                    className="mt-1 text-sm text-white/65"
+                    data-testid="text-mini-modular-body"
+                  >
                     Replace components, not the phone.
                   </p>
                 </div>
@@ -518,17 +578,27 @@ export default function Home() {
                   className="rounded-2xl border border-white/10 bg-white/4 p-4"
                   data-testid="mini-what-eco"
                 >
-                  <div className="flex items-center gap-2" data-testid="row-mini-eco">
+                  <div
+                    className="flex items-center gap-2"
+                    data-testid="row-mini-eco"
+                  >
                     <Leaf className="size-4 text-[hsl(var(--accent))]" />
                     <div className="ciore-display text-xs text-white/70">
                       Responsible
                     </div>
                   </div>
-                  <div className="mt-2 text-sm font-medium text-white" data-testid="text-mini-eco-title">
+                  <div
+                    className="mt-2 text-sm font-medium text-white"
+                    data-testid="text-mini-eco-title"
+                  >
                     Eco-conscious
                   </div>
-                  <p className="mt-1 text-sm text-white/65" data-testid="text-mini-eco-body">
-                    Materials chosen to align with the mission — and feel premium.
+                  <p
+                    className="mt-1 text-sm text-white/65"
+                    data-testid="text-mini-eco-body"
+                  >
+                    Materials chosen to align with the mission — and feel
+                    premium.
                   </p>
                 </div>
               </div>
@@ -547,7 +617,10 @@ export default function Home() {
             description="Cioré is not trying to out-hype mainstream smartphones. The difference is in the defaults — how the device behaves when you’re not thinking about it."
           />
 
-          <div className="mt-10 ciore-glass rounded-3xl p-6" data-testid="card-different">
+          <div
+            className="mt-10 ciore-glass rounded-3xl p-6"
+            data-testid="card-different"
+          >
             <Tabs defaultValue={FEATURES[0].key} data-testid="tabs-different">
               <TabsList
                 className="grid w-full grid-cols-2 gap-2 bg-transparent p-0 sm:grid-cols-4"
@@ -576,8 +649,14 @@ export default function Home() {
                     className="grid grid-cols-1 gap-4 md:grid-cols-12"
                     data-testid="grid-feature"
                   >
-                    <div className="md:col-span-7" data-testid="col-feature-copy">
-                      <div className="flex items-center gap-2" data-testid="row-feature-title">
+                    <div
+                      className="md:col-span-7"
+                      data-testid="col-feature-copy"
+                    >
+                      <div
+                        className="flex items-center gap-2"
+                        data-testid="row-feature-title"
+                      >
                         <f.icon
                           className="size-4 text-[hsl(var(--primary))]"
                           strokeWidth={2.25}
@@ -586,34 +665,61 @@ export default function Home() {
                           {f.title}
                         </div>
                       </div>
-                      <div className="mt-3 text-lg font-semibold text-white" data-testid="text-feature-summary">
+                      <div
+                        className="mt-3 text-lg font-semibold text-white"
+                        data-testid="text-feature-summary"
+                      >
                         {f.summary}
                       </div>
-                      <p className="mt-3 text-sm leading-6 text-white/70" data-testid="text-feature-details">
+                      <p
+                        className="mt-3 text-sm leading-6 text-white/70"
+                        data-testid="text-feature-details"
+                      >
                         {f.details}
                       </p>
-                      <div className="mt-5 flex flex-wrap gap-2" data-testid="group-feature-tags">
+                      <div
+                        className="mt-5 flex flex-wrap gap-2"
+                        data-testid="group-feature-tags"
+                      >
                         <Pill>Designed for trust</Pill>
                         <Pill>Minimal data exhaust</Pill>
                         <Pill>Built to last</Pill>
                       </div>
                     </div>
-                    <div className="md:col-span-5" data-testid="col-feature-visual">
+                    <div
+                      className="md:col-span-5"
+                      data-testid="col-feature-visual"
+                    >
                       <div
                         className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/25 p-4"
                         data-testid="card-feature-visual"
                       >
-                        <div className="ciore-display text-xs tracking-[0.18em] text-white/60" data-testid="text-visual-head">
+                        <div
+                          className="ciore-display text-xs tracking-[0.18em] text-white/60"
+                          data-testid="text-visual-head"
+                        >
                           SIGNALS
                         </div>
-                        <div className="mt-4 grid gap-2" data-testid="grid-signals">
-                          <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75" data-testid="signal-0">
+                        <div
+                          className="mt-4 grid gap-2"
+                          data-testid="grid-signals"
+                        >
+                          <div
+                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75"
+                            data-testid="signal-0"
+                          >
                             On-device defaults when possible
                           </div>
-                          <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75" data-testid="signal-1">
+                          <div
+                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75"
+                            data-testid="signal-1"
+                          >
                             Explicit permission prompts
                           </div>
-                          <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75" data-testid="signal-2">
+                          <div
+                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75"
+                            data-testid="signal-2"
+                          >
                             Repair-first hardware strategy
                           </div>
                         </div>
@@ -637,38 +743,71 @@ export default function Home() {
             description="The concept is straightforward. We’re designing the experience so the best default is the easiest path — and the hardware is meant to be maintained, not replaced."
           />
 
-          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3" data-testid="grid-works">
+          <div
+            className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3"
+            data-testid="grid-works"
+          >
             <div className="ciore-glass rounded-3xl p-6" data-testid="step-0">
-              <div className="ciore-display text-xs tracking-[0.18em] text-white/60" data-testid="text-step-0-label">
+              <div
+                className="ciore-display text-xs tracking-[0.18em] text-white/60"
+                data-testid="text-step-0-label"
+              >
                 STEP 01
               </div>
-              <div className="mt-3 text-lg font-semibold text-white" data-testid="text-step-0-title">
+              <div
+                className="mt-3 text-lg font-semibold text-white"
+                data-testid="text-step-0-title"
+              >
                 Default to on-device
               </div>
-              <p className="mt-2 text-sm leading-6 text-white/70" data-testid="text-step-0-body">
-                Keep sensitive surfaces local where possible — reducing data exhaust without asking you to micromanage settings.
+              <p
+                className="mt-2 text-sm leading-6 text-white/70"
+                data-testid="text-step-0-body"
+              >
+                Keep sensitive surfaces local where possible — reducing data
+                exhaust without asking you to micromanage settings.
               </p>
             </div>
             <div className="ciore-glass rounded-3xl p-6" data-testid="step-1">
-              <div className="ciore-display text-xs tracking-[0.18em] text-white/60" data-testid="text-step-1-label">
+              <div
+                className="ciore-display text-xs tracking-[0.18em] text-white/60"
+                data-testid="text-step-1-label"
+              >
                 STEP 02
               </div>
-              <div className="mt-3 text-lg font-semibold text-white" data-testid="text-step-1-title">
+              <div
+                className="mt-3 text-lg font-semibold text-white"
+                data-testid="text-step-1-title"
+              >
                 Make sharing explicit
               </div>
-              <p className="mt-2 text-sm leading-6 text-white/70" data-testid="text-step-1-body">
-                Clear prompts, readable permissions, and simple controls so sharing is a deliberate choice — not a hidden default.
+              <p
+                className="mt-2 text-sm leading-6 text-white/70"
+                data-testid="text-step-1-body"
+              >
+                Clear prompts, readable permissions, and simple controls so
+                sharing is a deliberate choice — not a hidden default.
               </p>
             </div>
             <div className="ciore-glass rounded-3xl p-6" data-testid="step-2">
-              <div className="ciore-display text-xs tracking-[0.18em] text-white/60" data-testid="text-step-2-label">
+              <div
+                className="ciore-display text-xs tracking-[0.18em] text-white/60"
+                data-testid="text-step-2-label"
+              >
                 STEP 03
               </div>
-              <div className="mt-3 text-lg font-semibold text-white" data-testid="text-step-2-title">
+              <div
+                className="mt-3 text-lg font-semibold text-white"
+                data-testid="text-step-2-title"
+              >
                 Maintain the device
               </div>
-              <p className="mt-2 text-sm leading-6 text-white/70" data-testid="text-step-2-body">
-                Modular serviceability means the phone can evolve through repairs and upgrades instead of being discarded.
+              <p
+                className="mt-2 text-sm leading-6 text-white/70"
+                data-testid="text-step-2-body"
+              >
+                Modular serviceability means the phone can evolve through
+                repairs and upgrades instead of being discarded.
               </p>
             </div>
           </div>
@@ -679,23 +818,47 @@ export default function Home() {
           className="mx-auto max-w-6xl px-4 py-14 md:px-6"
           data-testid="section-waitlist"
         >
-          <div className="ciore-glass ciore-ring rounded-3xl p-6 md:p-8" data-testid="card-waitlist">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-12" data-testid="grid-waitlist">
+          <div
+            className="ciore-glass ciore-ring rounded-3xl p-6 md:p-8"
+            data-testid="card-waitlist"
+          >
+            <div
+              className="grid grid-cols-1 gap-8 md:grid-cols-12"
+              data-testid="grid-waitlist"
+            >
               <div className="md:col-span-7" data-testid="col-waitlist-copy">
-                <div className="ciore-display text-xs tracking-[0.18em] text-white/60" data-testid="text-waitlist-eyebrow">
+                <div
+                  className="ciore-display text-xs tracking-[0.18em] text-white/60"
+                  data-testid="text-waitlist-eyebrow"
+                >
                   EARLY ACCESS
                 </div>
-                <h3 className="mt-3 text-2xl font-semibold text-white" data-testid="text-waitlist-title">
+                <h3
+                  className="mt-3 text-2xl font-semibold text-white"
+                  data-testid="text-waitlist-title"
+                >
                   Join the Cioré waitlist
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-white/70" data-testid="text-waitlist-body">
-                  Get product updates, prototype milestones, and early opportunities to shape Gaia: X.
+                <p
+                  className="mt-3 text-sm leading-6 text-white/70"
+                  data-testid="text-waitlist-body"
+                >
+                  Get product updates, prototype milestones, and early
+                  opportunities to shape Gaia: X.
                 </p>
               </div>
 
               <div className="md:col-span-5" data-testid="col-waitlist-form">
-                <form onSubmit={onSubmitWaitlist} className="space-y-3" data-testid="form-waitlist">
-                  <label className="text-xs text-white/70" htmlFor="waitlist-email" data-testid="label-email">
+                <form
+                  onSubmit={onSubmitWaitlist}
+                  className="space-y-3"
+                  data-testid="form-waitlist"
+                >
+                  <label
+                    className="text-xs text-white/70"
+                    htmlFor="waitlist-email"
+                    data-testid="label-email"
+                  >
                     Email
                   </label>
                   <input
@@ -719,11 +882,19 @@ export default function Home() {
                     Request early access
                   </Button>
 
-                  <div className="min-h-[20px] text-xs text-white/55" data-testid="status-waitlist">
-                    {waitlistStatus === "saved" ? "Saved. We’ll reach out with updates." : ""}
+                  <div
+                    className="min-h-[20px] text-xs text-white/55"
+                    data-testid="status-waitlist"
+                  >
+                    {waitlistStatus === "saved"
+                      ? "Saved. We’ll reach out with updates."
+                      : ""}
                   </div>
 
-                  <p className="text-xs text-white/45" data-testid="text-waitlist-note">
+                  <p
+                    className="text-xs text-white/45"
+                    data-testid="text-waitlist-note"
+                  >
                     We’ll only use your email for Cioré updates. No spam.
                   </p>
                 </form>
@@ -743,14 +914,24 @@ export default function Home() {
             description="Cioré is building trust through clarity. Here’s what people typically ask first."
           />
 
-          <div className="mt-10 ciore-glass rounded-3xl p-2" data-testid="card-faq">
-            <Accordion type="single" collapsible className="w-full" data-testid="accordion-faq">
+          <div
+            className="mt-10 ciore-glass rounded-3xl p-2"
+            data-testid="card-faq"
+          >
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full"
+              data-testid="accordion-faq"
+            >
               <AccordionItem value="item-1" data-testid="faq-0">
                 <AccordionTrigger data-testid="button-faq-0">
                   Is Gaia: X available today?
                 </AccordionTrigger>
                 <AccordionContent data-testid="text-faq-0">
-                  Gaia: X is currently a concept and prototyping effort. The waitlist helps us share progress, validate priorities, and invite early supporters into the process.
+                  Gaia: X is currently a concept and prototyping effort. The
+                  waitlist helps us share progress, validate priorities, and
+                  invite early supporters into the process.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2" data-testid="faq-1">
@@ -758,7 +939,10 @@ export default function Home() {
                   What does “solar assist” mean?
                 </AccordionTrigger>
                 <AccordionContent data-testid="text-faq-1">
-                  Solar assist is a supplementary energy layer intended to support endurance in the background — especially during idle time and light usage. It’s designed to be helpful, not performative.
+                  Solar assist is a supplementary energy layer intended to
+                  support endurance in the background — especially during idle
+                  time and light usage. It’s designed to be helpful, not
+                  performative.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3" data-testid="faq-2">
@@ -766,7 +950,10 @@ export default function Home() {
                   How does privacy show up in the product?
                 </AccordionTrigger>
                 <AccordionContent data-testid="text-faq-2">
-                  By default behavior: fewer hidden transfers, clearer permissions, and a preference for on-device handling when possible. Privacy is treated as a product surface, not an afterthought.
+                  By default behavior: fewer hidden transfers, clearer
+                  permissions, and a preference for on-device handling when
+                  possible. Privacy is treated as a product surface, not an
+                  afterthought.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4" data-testid="faq-3">
@@ -774,36 +961,68 @@ export default function Home() {
                   Will the phone be repairable?
                 </AccordionTrigger>
                 <AccordionContent data-testid="text-faq-3">
-                  That’s a core principle. Gaia: X is conceived around modular serviceability — the kind of design where replacement parts make sense and ownership lasts longer.
+                  That’s a core principle. Gaia: X is conceived around modular
+                  serviceability — the kind of design where replacement parts
+                  make sense and ownership lasts longer.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
           </div>
 
-          <footer className="mt-12 border-t border-white/10 pt-8" data-testid="footer">
-            <div className="flex flex-col items-start justify-between gap-6 md:flex-row" data-testid="footer-row">
+          <footer
+            className="mt-12 border-t border-white/10 pt-8"
+            data-testid="footer"
+          >
+            <div
+              className="flex flex-col items-start justify-between gap-6 md:flex-row"
+              data-testid="footer-row"
+            >
               <div data-testid="footer-left">
-                <div className="ciore-display text-sm text-white/90" data-testid="text-footer-brand">
+                <div
+                  className="ciore-display text-sm text-white/90"
+                  data-testid="text-footer-brand"
+                >
                   CIORÉ
                 </div>
-                <div className="mt-1 text-xs text-white/55" data-testid="text-footer-sub">
+                <div
+                  className="mt-1 text-xs text-white/55"
+                  data-testid="text-footer-sub"
+                >
                   Sustainable smartphones, privacy-first by design.
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 text-xs text-white/55" data-testid="footer-links">
-                <a href="#waitlist" className="hover:text-white" data-testid="link-footer-waitlist">
+              <div
+                className="flex items-center gap-4 text-xs text-white/55"
+                data-testid="footer-links"
+              >
+                <a
+                  href="#waitlist"
+                  className="hover:text-white"
+                  data-testid="link-footer-waitlist"
+                >
                   Waitlist
                 </a>
-                <a href="#what" className="hover:text-white" data-testid="link-footer-what">
+                <a
+                  href="#what"
+                  className="hover:text-white"
+                  data-testid="link-footer-what"
+                >
                   What it is
                 </a>
-                <a href="#different" className="hover:text-white" data-testid="link-footer-different">
+                <a
+                  href="#different"
+                  className="hover:text-white"
+                  data-testid="link-footer-different"
+                >
                   Why different
                 </a>
               </div>
 
-              <div className="text-xs text-white/45" data-testid="text-footer-legal">
+              <div
+                className="text-xs text-white/45"
+                data-testid="text-footer-legal"
+              >
                 © {new Date().getFullYear()} Cioré. All rights reserved.
               </div>
             </div>

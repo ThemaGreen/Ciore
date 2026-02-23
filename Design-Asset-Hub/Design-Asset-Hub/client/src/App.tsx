@@ -10,18 +10,22 @@ import Waitlist from "@/pages/waitlist";
 import Donate from "@/pages/donate";
 import Volunteer from "@/pages/volunteer-collab";
 import Progress from "@/pages/progress";
+import Navbar from "./components/Navbar";
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/waitlist" component={Waitlist} />
-      <Route path="/donate" component={Donate} />
-      <Route path="/volunteer" component={Volunteer} />
-      <Route path="/progress" component={Progress} />
-      <Route path="/*" component={NotFound} />
-    </Switch>
+    <>
+      <Navbar />
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/waitlist" component={Waitlist} />
+        <Route path="/donate" component={Donate} />
+        <Route path="/volunteer" component={Volunteer} />
+        <Route path="/progress" component={Progress} />
+        <Route path="/*" component={NotFound} />
+      </Switch>
+    </>
   );
 }
 

@@ -11,6 +11,7 @@ import Donate from "@/pages/donate";
 import Volunteer from "@/pages/volunteer-collab";
 import Progress from "@/pages/progress";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
         <Route path="/progress" component={Progress} />
         <Route path="/*" component={NotFound} />
       </Switch>
+      <Footer />
     </>
   );
 }

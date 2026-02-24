@@ -895,65 +895,6 @@ export default function Home() {
               </AccordionItem>
             </Accordion>
           </div>
-
-          <footer
-            className="mt-12 border-t border-white/10 pt-8"
-            data-testid="footer"
-          >
-            <div
-              className="flex flex-col items-start justify-between gap-6 md:flex-row"
-              data-testid="footer-row"
-            >
-              <div data-testid="footer-left">
-                <div
-                  className="ciore-display text-sm text-white/90"
-                  data-testid="text-footer-brand"
-                >
-                  CIORÉ
-                </div>
-                <div
-                  className="mt-1 text-xs text-white/55"
-                  data-testid="text-footer-sub"
-                >
-                  Sustainable smartphones, privacy-first by design.
-                </div>
-              </div>
-
-              <div
-                className="flex items-center gap-4 text-xs text-white/55"
-                data-testid="footer-links"
-              >
-                <a
-                  href="#waitlist"
-                  className="hover:text-white"
-                  data-testid="link-footer-waitlist"
-                >
-                  Waitlist
-                </a>
-                <a
-                  href="#what"
-                  className="hover:text-white"
-                  data-testid="link-footer-what"
-                >
-                  What it is
-                </a>
-                <a
-                  href="#different"
-                  className="hover:text-white"
-                  data-testid="link-footer-different"
-                >
-                  Why different
-                </a>
-              </div>
-
-              <div
-                className="text-xs text-white/45"
-                data-testid="text-footer-legal"
-              >
-                © {new Date().getFullYear()} Cioré. All rights reserved.
-              </div>
-            </div>
-          </footer>
         </section>
       </main>
 

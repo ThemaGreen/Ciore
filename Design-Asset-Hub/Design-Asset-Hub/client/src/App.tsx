@@ -10,6 +10,7 @@ import Waitlist from "@/pages/waitlist";
 import Donate from "@/pages/donate";
 import Volunteer from "@/pages/volunteer-collab";
 import Progress from "@/pages/progress";
+import PrivacyPolicy from "@/pages/privacy-policy";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -24,6 +25,7 @@ function Router() {
         <Route path="/donate" component={Donate} />
         <Route path="/volunteer" component={Volunteer} />
         <Route path="/progress" component={Progress} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/*" component={NotFound} />
       </Switch>
       <Footer />

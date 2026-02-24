@@ -1,9 +1,13 @@
 import { Instagram, Facebook } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
+import PrivacyPolicy from "@/pages/privacy-policy";
 
 export default function Footer() {
   return (
-    <div className="mt-10 border-t border-white/10 pt-6" data-testid="footer">
+    <div
+      className="mt-10 border-t border-white/10 pt-5 pb-2"
+      data-testid="footer"
+    >
       <div
         className="flex flex-col items-start justify-between gap-6 md:flex-row"
         data-testid="footer-row"
@@ -55,11 +59,20 @@ export default function Footer() {
             <FaTiktok size={18} />
           </a>
         </div>
-        <div
-          className="text-xs mr-5 text-white/45"
-          data-testid="text-footer-legal"
-        >
-          © {new Date().getFullYear()} Cioré. All rights reserved.
+        <div className="flex flex-col items-end gap-1 mr-5 text-xs text-white/45">
+          <div
+            className="text-xs mr-5 text-white/45"
+            data-testid="text-footer-legal"
+          >
+            © {new Date().getFullYear()} Cioré. All rights reserved.
+          </div>
+          <a
+            className="text-xs mr-5 text-white/45"
+            href="/privacy-policy"
+            data-testid="link-privacy-policy"
+          >
+            Privacy Policy
+          </a>
         </div>
       </div>
     </div>

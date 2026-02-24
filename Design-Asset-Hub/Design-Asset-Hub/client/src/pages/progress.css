@@ -22,6 +22,11 @@
     linear-gradient(180deg, #070a10 0%, #05070b 100%);
 }
 
+.progress-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
 .progress-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);

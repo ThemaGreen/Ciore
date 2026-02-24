@@ -10,8 +10,9 @@ import Waitlist from "@/pages/waitlist";
 import Donate from "@/pages/donate";
 import Volunteer from "@/pages/volunteer-collab";
 import Progress from "@/pages/progress";
-import Navbar from "./components/Navbar";
 import PrivacyPolicy from "@/pages/privacy-policy";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/*" component={NotFound} />
       </Switch>
+      <Footer />
     </>
   );
 }

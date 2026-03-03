@@ -1,906 +1,245 @@
-import { useEffect, useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Leaf, Lock, SunMedium, Wrench } from "lucide-react";
+import { useState } from "react";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { PhoneScene } from "@/components/three/phone-scene";
-
-function useLowPowerHint() {
-  const [low, setLow] = useState(false);
-
-  useEffect(() => {
-    const nav = navigator as any;
-    const cores =
-      typeof nav?.hardwareConcurrency === "number"
-        ? nav.hardwareConcurrency
-        : 8;
-    const mem = typeof nav?.deviceMemory === "number" ? nav.deviceMemory : 8;
-    const saveData = !!nav?.connection?.saveData;
-
-    setLow(saveData || cores <= 4 || mem <= 4);
-  }, []);
-
-  return low;
-}
 
 const FEATURES = [
   {
     key: "privacy",
-    title: "Privacy first",
-    icon: Lock,
-    summary:
-      "Designed to keep your data on-device whenever possible — and make sharing explicit.",
-    details:
-      "Cioré treats privacy as a product surface — not a settings screen. Gaia: X defaults to minimal collection, clear permissions, and local-first experiences that reduce data exhaust.",
+    title: "PRIVACY FIRST",
+    description: "Designed to keep your data on-device whenever possible — and make sharing explicit. No hidden trackers. No silent surveillance.",
   },
   {
     key: "solar",
-    title: "Solar assist",
-    icon: SunMedium,
-    summary: "An ambient energy layer that helps extend real-world endurance.",
-    details:
-      "Solar assist is not a gimmick. It’s a supplementary system designed to support idle drain and light usage — making the phone feel more resilient day-to-day.",
+    title: "SOLAR POWERED",
+    description: "An ambient energy layer that helps extend real-world endurance. Solar assist supports idle drain and light usage.",
+  },
+  {
+    key: "eco",
+    title: "ECO-CONSCIOUS",
+    description: "Material choices that respect the planet and still feel premium. Sustainability designed to look and feel legitimate.",
   },
   {
     key: "modular",
-    title: "Modular longevity",
-    icon: Wrench,
-    summary: "Repairable by design — so the phone can outlast trends.",
-    details:
-      "Gaia: X is conceived with modular serviceability — so replacing a worn component is the default path — not a reason to upgrade the entire device.",
+    title: "MODULAR",
+    description: "Repairable by design — so the phone can outlast trends. Replace components, not the whole device.",
   },
   {
-    key: "materials",
-    title: "Eco-conscious materials",
-    icon: Leaf,
-    summary:
-      "Material choices that respect the planet — and still feel premium.",
-    details:
-      "Sustainability should look and feel legitimate. Cioré balances durability, repairability, and responsible sourcing while maintaining a refined finish.",
+    key: "ai",
+    title: "ETHICAL AI",
+    description: "AI that serves you, not advertisers. Privacy-respecting, on-device intelligence that keeps your data yours.",
+  },
+  {
+    key: "community",
+    title: "COMMUNITY",
+    description: "Built with and for the people. Contributors, supporters, and early adopters shape every step of this journey.",
   },
 ] as const;
 
-function Pill({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
-      data-testid="badge-pill"
-    >
-      {children}
-    </span>
-  );
-}
-
-function SectionHeading({
-  eyebrow,
-  title,
-  description,
-}: {
-  eyebrow: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div
-      className="max-w-2xl"
-      data-testid={`section-${eyebrow.toLowerCase().replace(/\s+/g, "-")}`}
-    >
-      <div
-        className="ciore-display text-xs tracking-[0.18em] text-white/60"
-        data-testid="text-eyebrow"
-      >
-        {eyebrow}
-      </div>
-      <h2
-        className="mt-3 text-2xl font-semibold text-white md:text-3xl"
-        data-testid="text-section-title"
-      >
-        {title}
-      </h2>
-      <p
-        className="mt-3 text-sm leading-6 text-white/70 md:text-base"
-        data-testid="text-section-description"
-      >
-        {description}
-      </p>
-    </div>
-  );
-}
-
 export default function Home() {
-  const reduceMotion = useReducedMotion();
-  const lowPower = useLowPowerHint();
-
   const [waitlistEmail, setWaitlistEmail] = useState("");
-  const [waitlistStatus, setWaitlistStatus] = useState<"idle" | "saved">(
-    "idle",
-  );
+  const [waitlistStatus, setWaitlistStatus] = useState<"idle" | "saved">("idle");
+  const [activeTab, setActiveTab] = useState<string>("overview");
 
-  const heroVariant = useMemo(
-    () => ({
-      hidden: { opacity: 0, y: reduceMotion ? 0 : 12 },
-      show: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration: 0.65,
-          ease: "easeOut" as const,
-        },
-      },
-    }),
-    [reduceMotion],
-  );
-
-  const onSubmitWaitlist = (e: React.FormEvent) => {
+  const handleWaitlist = (e: React.FormEvent) => {
     e.preventDefault();
-    const email = waitlistEmail.trim();
-    const ok = /^\S+@\S+\.\S+$/.test(email);
+    const ok = /^\S+@\S+\.\S+$/.test(waitlistEmail.trim());
     if (!ok) return;
     setWaitlistStatus("saved");
   };
 
   return (
-    <div
-      className="min-h-screen bg-background ciore-grid ciore-noise"
-      data-testid="page-home"
-    >
-      <main>
-        <section className="relative" data-testid="section-hero">
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden="true"
+    <main className="sf-page" data-testid="home-page">
+
+      {/* === HERO === */}
+      <section className="sf-hero" data-testid="hero">
+        <div className="sf-hero-overlay" />
+        <div className="sf-hero-content">
+          <Link href="/" className="sf-hero-back" data-testid="hero-back">
+            <span className="sf-hero-back-arrow">←</span>
+            <span>BACK TO HOME</span>
+          </Link>
+          <span className="sf-hero-eyebrow" data-testid="hero-eyebrow">SUSTAINABLE TECH</span>
+          <h1 className="sf-hero-title" data-testid="hero-title">
+            CIORÉ GAIA: X
+          </h1>
+        </div>
+      </section>
+
+      {/* === STICKY TAB NAV === */}
+      <nav className="sf-tab-nav" data-testid="tab-nav">
+        {["overview", "features", "about", "get involved"].map((tab) => (
+          <button
+            key={tab}
+            className={`sf-tab-btn${activeTab === tab ? " sf-tab-btn--active" : ""}`}
+            onClick={() => {
+              setActiveTab(tab);
+              const el = document.getElementById(`section-${tab.replace(" ", "-")}`);
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
           >
-            <div className="absolute left-1/2 top-[-260px] h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(0,255,136,0.22),transparent_65%)] blur-2xl" />
-            <div className="absolute right-[-120px] top-[80px] h-[420px] w-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.12),transparent_70%)] blur-2xl" />
+            {tab.toUpperCase()}
+          </button>
+        ))}
+      </nav>
+
+      {/* === OVERVIEW SECTION === */}
+      <section className="sf-section sf-section--dark" id="section-overview" data-testid="overview">
+        <div className="sf-section-inner">
+          <h2 className="sf-section-heading">OVERVIEW</h2>
+          <p className="sf-section-body">
+            Cioré is creating sustainable smartphones that protect your privacy and respect the planet.
+            We are a Black Owned, Solar Powered, Privacy First company building tech that respects
+            people and protects the planet.
+          </p>
+          <p className="sf-section-body">
+            Our mission is to create mobile technology that works for you without working against you.
+            We don’t track you. We don’t sell you. And we definitely don’t believe your data is for sale.
+          </p>
+
+          <h3 className="sf-subsection-heading">PRODUCT CATEGORIES</h3>
+          <div className="sf-tags" data-testid="product-tags">
+            {["PRIVACY", "SUSTAINABILITY", "COMMUNITY", "INNOVATION", "ETHICAL AI"].map((tag) => (
+              <span key={tag} className="sf-tag">{tag}</span>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-12 md:grid-cols-12 md:gap-8 md:px-6 md:py-16">
-            <motion.div
-              className="md:col-span-6"
-              variants={heroVariant}
-              initial="hidden"
-              animate="show"
-              data-testid="hero-copy"
-            >
-              <div
-                className="flex flex-wrap items-center gap-2"
-                data-testid="group-hero-pills"
-              >
-                <Pill>Privacy-first</Pill>
-                <Pill>Solar assist</Pill>
-                <Pill>Modular by design</Pill>
-              </div>
+      {/* === FEATURES SECTION === */}
+      <section className="sf-section sf-section--gradient" id="section-features" data-testid="features">
+        <div className="sf-section-inner">
+          <h2 className="sf-section-heading">BUILT WITH INTENTION</h2>
+          <ul className="sf-bullet-list" data-testid="features-list">
+            {FEATURES.map((f) => (
+              <li key={f.key} className="sf-bullet-item">
+                <span className="sf-bullet-icon">•</span>
+                <div>
+                  <strong className="sf-bullet-title">{f.title}</strong>
+                  <p className="sf-bullet-desc">{f.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-              <h1
-                className="mt-6 text-balance text-4xl font-semibold leading-[1.05] text-white md:text-5xl"
-                data-testid="text-hero-title"
-              >
-                A sustainable smartphone
-                <span className="text-white/70">
-                  {" "}
-                  that protects your privacy{" "}
-                </span>
-                and respects the planet.
-              </h1>
-
-              <p
-                className="mt-5 max-w-xl text-pretty text-base leading-7 text-white/70"
-                data-testid="text-hero-subcopy"
-              >
-                Cioré Gaia: X is a premium phone concept built with intention —
-                designed to last longer, share less, and feel better to own.
-              </p>
-
-              <div
-                className="mt-7 flex flex-col gap-3 sm:flex-row"
-                data-testid="group-hero-actions"
-              >
-                <Button
-                  className="ciore-ring bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary))]/90"
-                  data-testid="button-join-waitlist"
-                  asChild
-                >
-                  <a href="#waitlist">
-                    Join the waitlist <ArrowRight className="ml-2 size-4" />
-                  </a>
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="border border-white/10 bg-white/5 text-white hover:bg-white/8"
-                  data-testid="button-learn-more"
-                  asChild
-                >
-                  <a href="#what">Learn what Gaia: X is</a>
-                </Button>
-              </div>
-
-              <div
-                className="mt-8 grid grid-cols-3 gap-3"
-                data-testid="grid-hero-stats"
-              >
-                <div
-                  className="ciore-glass rounded-2xl px-4 py-3"
-                  data-testid="card-stat-0"
-                >
-                  <div className="ciore-display text-xs text-white/55">
-                    Default
-                  </div>
-                  <div
-                    className="mt-1 text-sm font-medium text-white"
-                    data-testid="text-stat-0"
-                  >
-                    Local-first
-                  </div>
-                </div>
-                <div
-                  className="ciore-glass rounded-2xl px-4 py-3"
-                  data-testid="card-stat-1"
-                >
-                  <div className="ciore-display text-xs text-white/55">
-                    Energy
-                  </div>
-                  <div
-                    className="mt-1 text-sm font-medium text-white"
-                    data-testid="text-stat-1"
-                  >
-                    Solar assist
-                  </div>
-                </div>
-                <div
-                  className="ciore-glass rounded-2xl px-4 py-3"
-                  data-testid="card-stat-2"
-                >
-                  <div className="ciore-display text-xs text-white/55">
-                    Built to
-                  </div>
-                  <div
-                    className="mt-1 text-sm font-medium text-white"
-                    data-testid="text-stat-2"
-                  >
-                    Be repaired
-                  </div>
-                </div>
-              </div>
-
-              <p
-                className="mt-4 text-xs text-white/50"
-                data-testid="text-hero-footnote"
-              >
-                The 3D model is interactive (drag/hover). If your device is in
-                data-saver mode, we show a lightweight preview instead.
-              </p>
-            </motion.div>
-
-            <div className="md:col-span-6" data-testid="hero-visual">
-              <div className="ciore-glass ciore-ring relative overflow-hidden rounded-3xl p-4 md:p-5">
-                <div
-                  className="flex items-center justify-between"
-                  data-testid="group-visual-topbar"
-                >
-                  <div
-                    className="ciore-display text-xs tracking-[0.18em] text-white/60"
-                    data-testid="text-visual-label"
-                  >
-                    DEVICE OVERVIEW
-                  </div>
-                  <div
-                    className="text-xs text-white/60"
-                    data-testid="text-visual-hint"
-                  >
-                    Drag to inspect
-                  </div>
-                </div>
-                <div
-                  className="mt-3 aspect-[4/5] w-full"
-                  data-testid="canvas-phone"
-                >
-                  <PhoneScene lowPower={lowPower} />
-                </div>
-                <div
-                  className="mt-4 grid grid-cols-3 gap-2"
-                  data-testid="grid-visual-cues"
-                >
-                  <div
-                    className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2"
-                    data-testid="cue-privacy"
-                  >
-                    <div
-                      className="flex items-center gap-2 text-xs text-white/70"
-                      data-testid="text-cue-privacy"
-                    >
-                      <Lock className="size-4 text-[hsl(var(--primary))]" />{" "}
-                      Privacy cues
-                    </div>
-                  </div>
-                  <div
-                    className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2"
-                    data-testid="cue-solar"
-                  >
-                    <div
-                      className="flex items-center gap-2 text-xs text-white/70"
-                      data-testid="text-cue-solar"
-                    >
-                      <SunMedium className="size-4 text-[hsl(var(--accent))]" />{" "}
-                      Solar assist
-                    </div>
-                  </div>
-                  <div
-                    className="rounded-2xl border border-white/10 bg-black/20 px-3 py-2"
-                    data-testid="cue-modular"
-                  >
-                    <div
-                      className="flex items-center gap-2 text-xs text-white/70"
-                      data-testid="text-cue-modular"
-                    >
-                      <Wrench className="size-4 text-white/70" /> Modular build
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="mt-4 flex items-center justify-between text-xs text-white/55"
-                data-testid="row-visual-meta"
-              >
-                <div data-testid="text-visual-meta-left">
-                  Concept render · optimized WebGL
-                </div>
-                <div
-                  className="hidden sm:block"
-                  data-testid="text-visual-meta-right"
-                >
-                  <span className="text-white/70">Tip:</span> try hover for tilt
-                </div>
-              </div>
+      {/* === ABOUT SECTION === */}
+      <section className="sf-section sf-section--dark" id="section-about" data-testid="about-section">
+        <div className="sf-section-inner sf-two-col">
+          <div className="sf-two-col-text">
+            <h2 className="sf-section-heading">WHAT WE STAND FOR</h2>
+            <p className="sf-section-body">
+              Technology should serve people — not use them. Cioré exists to challenge what big
+              tech has made normal.
+            </p>
+            <p className="sf-section-body">
+              We’re here to disrupt a system that treats consumers like products.
+              Our stance is simple. You deserve better.
+            </p>
+            <p className="sf-section-body sf-section-emphasis">
+              Every Dollar Counts. Every Tier Matters. A million people giving $1 can fund this vision.
+            </p>
+          </div>
+          <div className="sf-two-col-stat">
+            <div className="sf-stat-card" data-testid="stat-card">
+              <div className="sf-stat-number">1M</div>
+              <div className="sf-stat-label">BELIEVERS NEEDED</div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section
-          id="what"
-          className="mx-auto max-w-6xl px-4 py-14 md:px-6"
-          data-testid="section-what"
-        >
-          <SectionHeading
-            eyebrow="WHAT CIORE IS"
-            title="A phone concept built like a long-term product — not a yearly upgrade."
-            description="Gaia: X is Cioré’s vision for a premium smartphone that treats sustainability and privacy as first-class design constraints — without sacrificing feel, finish, or clarity."
-          />
-
-          <div
-            className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-12"
-            data-testid="grid-what"
-          >
-            <div
-              className="ciore-glass rounded-3xl p-6 md:col-span-5"
-              data-testid="card-what-left"
-            >
-              <div
-                className="ciore-display text-xs tracking-[0.18em] text-white/60"
-                data-testid="text-card-label"
-              >
-                VALUE IN 8 SECONDS
-              </div>
-              <ol
-                className="mt-4 space-y-3 text-sm text-white/75"
-                data-testid="list-value"
-              >
-                <li data-testid="item-value-0">
-                  <span className="text-white">1.</span> It’s a smartphone
-                  (hardware + OS) with a premium feel.
-                </li>
-                <li data-testid="item-value-1">
-                  <span className="text-white">2.</span> It minimizes data
-                  exhaust by default — privacy-first.
-                </li>
-                <li data-testid="item-value-2">
-                  <span className="text-white">3.</span> It’s designed to last:
-                  modular repairability + responsible materials.
-                </li>
-                <li data-testid="item-value-3">
-                  <span className="text-white">4.</span> Solar assist supports
-                  endurance in the background.
-                </li>
-              </ol>
-            </div>
-
-            <div
-              className="ciore-glass rounded-3xl p-6 md:col-span-7"
-              data-testid="card-what-right"
-            >
-              <div
-                className="grid grid-cols-1 gap-3 sm:grid-cols-2"
-                data-testid="grid-what-cards"
-              >
-                <div
-                  className="rounded-2xl border border-white/10 bg-white/4 p-4"
-                  data-testid="mini-what-privacy"
-                >
-                  <div
-                    className="flex items-center gap-2"
-                    data-testid="row-mini-privacy"
-                  >
-                    <Lock className="size-4 text-[hsl(var(--primary))]" />
-                    <div className="ciore-display text-xs text-white/70">
-                      Privacy surface
-                    </div>
-                  </div>
-                  <div
-                    className="mt-2 text-sm font-medium text-white"
-                    data-testid="text-mini-privacy-title"
-                  >
-                    Clear permissions
-                  </div>
-                  <p
-                    className="mt-1 text-sm text-white/65"
-                    data-testid="text-mini-privacy-body"
-                  >
-                    Defaults that reduce tracking, plus controls that are easy
-                    to understand.
-                  </p>
-                </div>
-
-                <div
-                  className="rounded-2xl border border-white/10 bg-white/4 p-4"
-                  data-testid="mini-what-solar"
-                >
-                  <div
-                    className="flex items-center gap-2"
-                    data-testid="row-mini-solar"
-                  >
-                    <SunMedium className="size-4 text-[hsl(var(--accent))]" />
-                    <div className="ciore-display text-xs text-white/70">
-                      Ambient energy
-                    </div>
-                  </div>
-                  <div
-                    className="mt-2 text-sm font-medium text-white"
-                    data-testid="text-mini-solar-title"
-                  >
-                    Solar assist
-                  </div>
-                  <p
-                    className="mt-1 text-sm text-white/65"
-                    data-testid="text-mini-solar-body"
-                  >
-                    A supplementary layer for day-to-day resilience.
-                  </p>
-                </div>
-
-                <div
-                  className="rounded-2xl border border-white/10 bg-white/4 p-4"
-                  data-testid="mini-what-modular"
-                >
-                  <div
-                    className="flex items-center gap-2"
-                    data-testid="row-mini-modular"
-                  >
-                    <Wrench className="size-4 text-white/80" />
-                    <div className="ciore-display text-xs text-white/70">
-                      Built to repair
-                    </div>
-                  </div>
-                  <div
-                    className="mt-2 text-sm font-medium text-white"
-                    data-testid="text-mini-modular-title"
-                  >
-                    Modular design
-                  </div>
-                  <p
-                    className="mt-1 text-sm text-white/65"
-                    data-testid="text-mini-modular-body"
-                  >
-                    Replace components, not the phone.
-                  </p>
-                </div>
-
-                <div
-                  className="rounded-2xl border border-white/10 bg-white/4 p-4"
-                  data-testid="mini-what-eco"
-                >
-                  <div
-                    className="flex items-center gap-2"
-                    data-testid="row-mini-eco"
-                  >
-                    <Leaf className="size-4 text-[hsl(var(--accent))]" />
-                    <div className="ciore-display text-xs text-white/70">
-                      Responsible
-                    </div>
-                  </div>
-                  <div
-                    className="mt-2 text-sm font-medium text-white"
-                    data-testid="text-mini-eco-title"
-                  >
-                    Eco-conscious
-                  </div>
-                  <p
-                    className="mt-1 text-sm text-white/65"
-                    data-testid="text-mini-eco-body"
-                  >
-                    Materials chosen to align with the mission — and feel
-                    premium.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="different"
-          className="mx-auto max-w-6xl px-4 py-14 md:px-6"
-          data-testid="section-different"
-        >
-          <SectionHeading
-            eyebrow="WHY IT’S DIFFERENT"
-            title="Less extraction. More ownership."
-            description="Cioré is not trying to out-hype mainstream smartphones. The difference is in the defaults — how the device behaves when you’re not thinking about it."
-          />
-
-          <div
-            className="mt-10 ciore-glass rounded-3xl p-6"
-            data-testid="card-different"
-          >
-            <Tabs defaultValue={FEATURES[0].key} data-testid="tabs-different">
-              <TabsList
-                className="grid w-full grid-cols-2 gap-2 bg-transparent p-0 sm:grid-cols-4"
-                data-testid="tabslist-different"
-              >
-                {FEATURES.map((f) => (
-                  <TabsTrigger
-                    key={f.key}
-                    value={f.key}
-                    className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/75 data-[state=active]:bg-white/10 data-[state=active]:text-white"
-                    data-testid={`tab-${f.key}`}
-                  >
-                    {f.title}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-
-              {FEATURES.map((f) => (
-                <TabsContent
-                  key={f.key}
-                  value={f.key}
-                  className="mt-6"
-                  data-testid={`panel-${f.key}`}
-                >
-                  <div
-                    className="grid grid-cols-1 gap-4 md:grid-cols-12"
-                    data-testid="grid-feature"
-                  >
-                    <div
-                      className="md:col-span-7"
-                      data-testid="col-feature-copy"
-                    >
-                      <div
-                        className="flex items-center gap-2"
-                        data-testid="row-feature-title"
-                      >
-                        <f.icon
-                          className="size-4 text-[hsl(var(--primary))]"
-                          strokeWidth={2.25}
-                        />
-                        <div className="ciore-display text-xs tracking-[0.18em] text-white/60">
-                          {f.title}
-                        </div>
-                      </div>
-                      <div
-                        className="mt-3 text-lg font-semibold text-white"
-                        data-testid="text-feature-summary"
-                      >
-                        {f.summary}
-                      </div>
-                      <p
-                        className="mt-3 text-sm leading-6 text-white/70"
-                        data-testid="text-feature-details"
-                      >
-                        {f.details}
-                      </p>
-                      <div
-                        className="mt-5 flex flex-wrap gap-2"
-                        data-testid="group-feature-tags"
-                      >
-                        <Pill>Designed for trust</Pill>
-                        <Pill>Minimal data exhaust</Pill>
-                        <Pill>Built to last</Pill>
-                      </div>
-                    </div>
-                    <div
-                      className="md:col-span-5"
-                      data-testid="col-feature-visual"
-                    >
-                      <div
-                        className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/25 p-4"
-                        data-testid="card-feature-visual"
-                      >
-                        <div
-                          className="ciore-display text-xs tracking-[0.18em] text-white/60"
-                          data-testid="text-visual-head"
-                        >
-                          SIGNALS
-                        </div>
-                        <div
-                          className="mt-4 grid gap-2"
-                          data-testid="grid-signals"
-                        >
-                          <div
-                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75"
-                            data-testid="signal-0"
-                          >
-                            On-device defaults when possible
-                          </div>
-                          <div
-                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75"
-                            data-testid="signal-1"
-                          >
-                            Explicit permission prompts
-                          </div>
-                          <div
-                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/75"
-                            data-testid="signal-2"
-                          >
-                            Repair-first hardware strategy
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-              ))}
-            </Tabs>
-          </div>
-        </section>
-
-        <section
-          id="works"
-          className="mx-auto max-w-6xl px-4 py-14 md:px-6"
-          data-testid="section-works"
-        >
-          <SectionHeading
-            eyebrow="HOW IT WORKS"
-            title="A simple loop: local-first + explicit sharing + longevity."
-            description="The concept is straightforward. We’re designing the experience so the best default is the easiest path — and the hardware is meant to be maintained, not replaced."
-          />
-
-          <div
-            className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3"
-            data-testid="grid-works"
-          >
-            <div className="ciore-glass rounded-3xl p-6" data-testid="step-0">
-              <div
-                className="ciore-display text-xs tracking-[0.18em] text-white/60"
-                data-testid="text-step-0-label"
-              >
-                STEP 01
-              </div>
-              <div
-                className="mt-3 text-lg font-semibold text-white"
-                data-testid="text-step-0-title"
-              >
-                Default to on-device
-              </div>
-              <p
-                className="mt-2 text-sm leading-6 text-white/70"
-                data-testid="text-step-0-body"
-              >
-                Keep sensitive surfaces local where possible — reducing data
-                exhaust without asking you to micromanage settings.
-              </p>
-            </div>
-            <div className="ciore-glass rounded-3xl p-6" data-testid="step-1">
-              <div
-                className="ciore-display text-xs tracking-[0.18em] text-white/60"
-                data-testid="text-step-1-label"
-              >
-                STEP 02
-              </div>
-              <div
-                className="mt-3 text-lg font-semibold text-white"
-                data-testid="text-step-1-title"
-              >
-                Make sharing explicit
-              </div>
-              <p
-                className="mt-2 text-sm leading-6 text-white/70"
-                data-testid="text-step-1-body"
-              >
-                Clear prompts, readable permissions, and simple controls so
-                sharing is a deliberate choice — not a hidden default.
-              </p>
-            </div>
-            <div className="ciore-glass rounded-3xl p-6" data-testid="step-2">
-              <div
-                className="ciore-display text-xs tracking-[0.18em] text-white/60"
-                data-testid="text-step-2-label"
-              >
-                STEP 03
-              </div>
-              <div
-                className="mt-3 text-lg font-semibold text-white"
-                data-testid="text-step-2-title"
-              >
-                Maintain the device
-              </div>
-              <p
-                className="mt-2 text-sm leading-6 text-white/70"
-                data-testid="text-step-2-body"
-              >
-                Modular serviceability means the phone can evolve through
-                repairs and upgrades instead of being discarded.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="waitlist"
-          className="mx-auto max-w-6xl px-4 py-14 md:px-6"
-          data-testid="section-waitlist"
-        >
-          <div
-            className="ciore-glass ciore-ring rounded-3xl p-6 md:p-8"
-            data-testid="card-waitlist"
-          >
-            <div
-              className="grid grid-cols-1 gap-8 md:grid-cols-12"
-              data-testid="grid-waitlist"
-            >
-              <div className="md:col-span-7" data-testid="col-waitlist-copy">
-                <div
-                  className="ciore-display text-xs tracking-[0.18em] text-white/60"
-                  data-testid="text-waitlist-eyebrow"
-                >
-                  EARLY ACCESS
-                </div>
-                <h3
-                  className="mt-3 text-2xl font-semibold text-white"
-                  data-testid="text-waitlist-title"
-                >
-                  Join the Cioré waitlist
-                </h3>
-                <p
-                  className="mt-3 text-sm leading-6 text-white/70"
-                  data-testid="text-waitlist-body"
-                >
-                  Get product updates, prototype milestones, and early
-                  opportunities to shape Gaia: X.
+      {/* === GET INVOLVED SECTION === */}
+      <section className="sf-section sf-section--gradient" id="section-get-involved" data-testid="get-involved">
+        <div className="sf-section-inner">
+          <h2 className="sf-section-heading">HELP US CHANGE THE WAY TECHNOLOGY IS MADE</h2>
+          <div className="sf-cards" data-testid="involvement-cards">
+            {/* Waitlist */}
+            <div className="sf-card" data-testid="card-waitlist">
+              <div className="sf-card-img sf-card-img--waitlist" />
+              <div className="sf-card-body">
+                <h3 className="sf-card-title">JOIN THE CIORÉ WAITLIST</h3>
+                <p className="sf-card-desc">
+                  Sign up to be among the first to experience a phone that protects your privacy and the planet.
                 </p>
-              </div>
-
-              <div className="md:col-span-5" data-testid="col-waitlist-form">
-                <form
-                  onSubmit={onSubmitWaitlist}
-                  className="space-y-3"
-                  data-testid="form-waitlist"
+                <a
+                  href="https://forms.gle/36CiFrDP9t5cGfmJ9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sf-card-link"
+                  data-testid="card-waitlist-link"
                 >
-                  <label
-                    className="text-xs text-white/70"
-                    htmlFor="waitlist-email"
-                    data-testid="label-email"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="waitlist-email"
-                    type="email"
-                    value={waitlistEmail}
-                    onChange={(e) => {
-                      setWaitlistEmail(e.target.value);
-                      setWaitlistStatus("idle");
-                    }}
-                    placeholder="you@domain.com"
-                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))]/50"
-                    data-testid="input-waitlist-email"
-                    autoComplete="email"
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full ciore-ring bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary))]/90"
-                    data-testid="button-waitlist-submit"
-                  >
-                    Request early access
-                  </Button>
+                  SIGN UP
+                </a>
+              </div>
+            </div>
 
-                  <div
-                    className="min-h-[20px] text-xs text-white/55"
-                    data-testid="status-waitlist"
-                  >
-                    {waitlistStatus === "saved"
-                      ? "Saved. We’ll reach out with updates."
-                      : ""}
-                  </div>
+            {/* Donate */}
+            <div className="sf-card" data-testid="card-donate">
+              <div className="sf-card-img sf-card-img--donate" />
+              <div className="sf-card-body">
+                <h3 className="sf-card-title">DONATE</h3>
+                <p className="sf-card-desc">
+                  Every donation powers research, design and progress toward a better digital future.
+                </p>
+                <Link href="/donate" className="sf-card-link" data-testid="card-donate-link">
+                  DONATE NOW
+                </Link>
+              </div>
+            </div>
 
-                  <p
-                    className="text-xs text-white/45"
-                    data-testid="text-waitlist-note"
-                  >
-                    We’ll only use your email for Cioré updates. No spam.
-                  </p>
-                </form>
+            {/* Volunteer */}
+            <div className="sf-card" data-testid="card-volunteer">
+              <div className="sf-card-img sf-card-img--volunteer" />
+              <div className="sf-card-body">
+                <h3 className="sf-card-title">CONTRIBUTE YOUR GENIUS</h3>
+                <p className="sf-card-desc">
+                  We welcome innovators, creators, and visionaries who want to make an impact.
+                  Contribute your genius and be part of something transformative.
+                </p>
+                <a
+                  href="https://forms.gle/fYNzgLXAiqsBqUhN9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sf-card-link"
+                  data-testid="card-volunteer-link"
+                >
+                  JOIN OUR TEAM
+                </a>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section
-          id="faq"
-          className="mx-auto max-w-6xl px-4 pb-20 md:px-6"
-          data-testid="section-faq"
-        >
-          <SectionHeading
-            eyebrow="QUESTIONS"
-            title="Clear answers, no hype."
-            description="Cioré is building trust through clarity. Here’s what people typically ask first."
-          />
-
-          <div
-            className="mt-10 ciore-glass rounded-3xl p-2"
-            data-testid="card-faq"
-          >
-            <Accordion
-              type="single"
-              collapsible
-              className="w-full"
-              data-testid="accordion-faq"
-            >
-              <AccordionItem value="item-1" data-testid="faq-0">
-                <AccordionTrigger data-testid="button-faq-0">
-                  Is Gaia: X available today?
-                </AccordionTrigger>
-                <AccordionContent data-testid="text-faq-0">
-                  Gaia: X is currently a concept and prototyping effort. The
-                  waitlist helps us share progress, validate priorities, and
-                  invite early supporters into the process.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2" data-testid="faq-1">
-                <AccordionTrigger data-testid="button-faq-1">
-                  What does “solar assist” mean?
-                </AccordionTrigger>
-                <AccordionContent data-testid="text-faq-1">
-                  Solar assist is a supplementary energy layer intended to
-                  support endurance in the background — especially during idle
-                  time and light usage. It’s designed to be helpful, not
-                  performative.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3" data-testid="faq-2">
-                <AccordionTrigger data-testid="button-faq-2">
-                  How does privacy show up in the product?
-                </AccordionTrigger>
-                <AccordionContent data-testid="text-faq-2">
-                  By default behavior: fewer hidden transfers, clearer
-                  permissions, and a preference for on-device handling when
-                  possible. Privacy is treated as a product surface, not an
-                  afterthought.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4" data-testid="faq-3">
-                <AccordionTrigger data-testid="button-faq-3">
-                  Will the phone be repairable?
-                </AccordionTrigger>
-                <AccordionContent data-testid="text-faq-3">
-                  That’s a core principle. Gaia: X is conceived around modular
-                  serviceability — the kind of design where replacement parts
-                  make sense and ownership lasts longer.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+      {/* === WAITLIST FORM === */}
+      <section className="sf-section sf-section--black" id="waitlist" data-testid="waitlist-section">
+        <div className="sf-section-inner sf-waitlist">
+          <div className="sf-waitlist-text">
+            <h2 className="sf-section-heading">
+              JOIN OUR WAITLIST.<br />BE THE FIRST TO KNOW<br />WHEN WE LAUNCH.
+            </h2>
           </div>
-        </section>
-      </main>
+          <div className="sf-waitlist-faq">
+            <details className="sf-faq-item">
+              <summary className="sf-faq-trigger">Why Join the Waitlist <span>❯</span></summary>
+              <div className="sf-faq-panel">Joining the waitlist keeps you in the loop as we build. You’ll get exclusive early access, milestone updates, and opportunities to shape the product before anyone else.</div>
+            </details>
+            <details className="sf-faq-item">
+              <summary className="sf-faq-trigger">How You’ll Be Notified <span>❯</span></summary>
+              <div className="sf-faq-panel">We’ll reach out via email when we have major updates, early access opportunities, or when the product is ready to ship.</div>
+            </details>
+            <details className="sf-faq-item">
+              <summary className="sf-faq-trigger">Privacy and Your Information <span>❯</span></summary>
+              <div className="sf-faq-panel">Your information is safe, secure, and never sold or shared. It will only be used to keep you updated on our development progress, launch timeline, and opportunities to get involved.</div>
+            </details>
+            <details className="sf-faq-item">
+              <summary className="sf-faq-trigger">What Information Will We Need <span>❯</span></summary>
+              <div className="sf-faq-panel">We only need your email address to add you to the waitlist. Simple, minimal, and private — just like our product.</div>
+            </details>
+          </div>
+        </div>
+      </section>
 
-      <div className="sr-only" data-testid="sr-only-routing">
-        <Link href="/">Home</Link>
-      </div>
-    </div>
+    </main>
   );
 }

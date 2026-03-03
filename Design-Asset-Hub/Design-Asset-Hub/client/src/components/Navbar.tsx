@@ -1,88 +1,68 @@
+import { useState } from "react";
 import { Link } from "wouter";
-import { Leaf } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
-      <header
-        className="sticky top-0 z-40 border-b border-white/10 bg-background/40 backdrop-blur"
-        data-testid="nav-top"
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-          <Link
-            href="/"
-            className="flex items-center gap-3"
-            data-testid="group-brand"
-          >
-            <div
-              className="grid size-9 place-items-center rounded-xl border border-white/10 bg-white/5 ciore-ring"
-              aria-hidden="true"
-              data-testid="logo-mark"
-            >
-              <Leaf
-                className="size-4 text-[hsl(var(--accent))]"
-                strokeWidth={2.25}
+      <header className="sf-nav" data-testid="nav-top">
+        <div className="sf-nav-inner">
+          {/* Logo */}
+          <Link href="/" className="sf-nav-logo" data-testid="group-brand">
+            <div className="sf-logo-mark" aria-hidden="true" data-testid="logo-mark">
+              <img
+                src="/ciore-logo.png"
+                alt="Cioré Logo"
+                className="sf-logo-img"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  (e.target as HTMLImageElement).parentElement!.innerHTML = '<span class="sf-logo-text">C</span>';
+                }}
               />
             </div>
-
-            <div className="leading-tight" data-testid="text-brand">
-              <div className="ciore-display text-sm text-white/90">CIORÉ</div>
-              <div className="text-xs text-white/55">Gaia: X</div>
+            <div className="sf-nav-brand-text" data-testid="text-brand">
+              <div className="sf-brand-name">CIORÉ</div>
+              <div className="sf-brand-sub">Gaia: X</div>
             </div>
           </Link>
 
-          <nav
-            className="hidden items-center gap-6 text-sm text-white/70 md:flex"
-            data-testid="nav-links"
-          >
-            <a
-              className="hover:text-white"
-              href="/progress"
-              data-testid="link-progress"
-            >
-              Progress
-            </a>
-            <a
-              className="hover:text-white"
-              href="/about"
-              data-testid="link-about"
-            >
-              About
-            </a>
-            <a
-              className="hover:text-white"
-              href="/donate"
-              data-testid="link-donate"
-            >
-              Donate
-            </a>
-            <a
-              className="hover:text-white"
-              href="/volunteer"
-              data-testid="link-volunteer"
-            >
-              Volunteer
-            </a>
+          {/* Desktop Nav Links */}
+          <nav className="sf-nav-links" data-testid="nav-links">
+            <Link href="/progress" className="sf-nav-link">Progress</Link>
+            <Link href="/about" className="sf-nav-link">About</Link>
+            <Link href="/donate" className="sf-nav-link">Donate</Link>
+            <Link href="/volunteer" className="sf-nav-link">Volunteer</Link>
           </nav>
 
-          <div className="flex items-center gap-2" data-testid="group-cta">
-            <a
-              href="#waitlist"
-              className="hidden text-xs text-white/70 hover:text-white md:inline"
-              data-testid="link-waitlist"
-            >
-              Join waitlist
-            </a>
-            <Button
-              className="ciore-ring bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary))]/90"
-              data-testid="button-hero-cta"
-              asChild
-            >
-              <a href="#waitlist">Get early access</a>
-            </Button>
-          </div>
+          {/* CTA Button */}
+          <Link href="#waitlist" className="sf-nav-cta" data-testid="nav-cta">
+            JOIN WAITLIST
+          </Link>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="sf-nav-hamburger"
+            aria-label="Open menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+            data-testid="nav-hamburger"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
+
+        {/* Mobile Dropdown */}
+        {menuOpen && (
+          <div className="sf-nav-mobile" data-testid="nav-mobile">
+            <Link href="/progress" className="sf-nav-mobile-link" onClick={() => setMenuOpen(false)}>Progress</Link>
+            <Link href="/about" className="sf-nav-mobile-link" onClick={() => setMenuOpen(false)}>About</Link>
+            <Link href="/donate" className="sf-nav-mobile-link" onClick={() => setMenuOpen(false)}>Donate</Link>
+            <Link href="/volunteer" className="sf-nav-mobile-link" onClick={() => setMenuOpen(false)}>Volunteer</Link>
+            <Link href="#waitlist" className="sf-nav-cta sf-nav-mobile-cta" onClick={() => setMenuOpen(false)}>JOIN WAITLIST</Link>
+          </div>
+        )}
       </header>
     </>
   );
